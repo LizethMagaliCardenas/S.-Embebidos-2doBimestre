@@ -1,0 +1,417 @@
+//////////////////////CODIGO TENDENCIA LINEAL-PROCESSING////////////////////////////////////////////////////////////
+/*
+ * Universidad Técnica del Norte
+ * Facultad de Ingeniería en Ciencias Aplicadas
+ * Sistemas Embebidos
+ * Nombre: Magali Cárdenas
+ * Lab 04
+ * Fecha: 19/01/2021
+ */
+import processing.serial.*;
+Serial port;
+float datoEstatura;
+float auxEstatura=0;
+float datoPeso;
+int aux=0;
+
+void setup (){
+  
+  port= new Serial(this, "COM10",9600);
+  size(1000,600); // ancho, alto
+  background(#DFBEF5); //color de fondo RGB
+  stroke(0); //color y linea de bordes
+  strokeWeight(2);//ancho de línea
+  line(50,5,50,450); // línea en x(peso)
+  line(50,450,650,450);
+  line(50,450,650,450);//líena en eje y(estatura)
+  
+  stroke(#0A2C1C);//color de líneas internas 
+  strokeWeight(0.5); //ancho de líneas 
+  //lineas de gráfica en y
+  line(125,5,125,450);
+  line(200,5,200,450);
+  line(275,5,275,450);
+  line(350,5,350,450);
+  line(425,5,425,450);
+  line(500,5,500,450);
+  line(575,5,575,450);
+  line(650,5,650,450);
+  
+  //líneas de gráfica en x
+  
+  line(50,400,650,400);
+  line(50,350,650,350);
+  line(50,300,650,300);
+  line(50,250,650,250);
+  line(50,200,650,200);
+  line(50,150,650,150);
+  line(50,100,650,100);
+  line(50,50,650,50);
+  
+  textSize(15);//numero de tamaño números
+  fill(#024324);// color de número
+  text("0",35,450);
+  text("10",15,400);
+  text("20",15,350);
+  text("30",15,300);
+  text("40",15,250);
+  text("50",15,200);
+  text("60",15,150);
+  text("70",15,100);
+  text("80",15,50);
+  
+  //Números en eje x (estatura)
+  text("150",50,470);
+  text("155",125,470);
+  text("160",200,470);
+  text("165",275,470);
+  text("170",350,470);
+  text("175",425,470);
+  text("180",500,470);
+  text("185",575,470);
+  text("190",650,470);
+  
+  textSize(18);
+  fill(1);
+  text("Regresión Lineal",750,50);
+  text("Magali Cárdenas",750,100);
+  text("Gráfica Peso/Estatura",750,300);
+  text("y=1.1797x-133.39",750,350);
+}
+
+void serialEvent(Serial port){
+  datoEstatura=port.read();
+  auxEstatura=int(datoEstatura); //Convertir de string a int
+  println("Estatura= ");//valores a mostran en monitor processing
+  println(datoEstatura);
+  datoPeso=datoEstatura*(1.1797)-133.39; //dato proporcionado de forma serial
+  println("Peso= ");
+  println(datoPeso);
+}
+
+void draw(){
+  //Datos Proporcionados 
+  if(datoPeso>0){
+  stroke(#C4320E);
+  strokeWeight(2);
+  fill(#C4320E);
+  ellipse((datoEstatura*15)-2200,450-(datoPeso)*5,10,10);
+  }
+  //color de datos 
+  stroke(#13861B);
+  strokeWeight(2);
+  fill(#13861B);
+  //graficar cada dato obtenido anteriormente
+  ellipse((170*15)-2200,450-67*5,5,5); //centro, ancho y altura
+  ellipse((180*15)-2200,450-80*5,5,5); //centro, ancho y altura
+  ellipse((170*15)-2200,450-65*5,5,5); //centro, ancho y altura
+  ellipse((178*15)-2200,450-75*5,5,5); //centro, ancho y altura
+  ellipse((160*15)-2200,450-55*5,5,5); //centro, ancho y altura
+  ellipse((163*15)-2200,450-60*5,5,5); //centro, ancho y altura
+  ellipse((165*15)-2200,450-63*5,5,5); //centro, ancho y altura
+  ellipse((170*15)-2200,450-70*5,5,5); //centro, ancho y altura
+  ellipse((164*15)-2200,450-62*5,5,5); //centro, ancho y altura
+  ellipse((176*15)-2200,450-77*5,5,5); //centro, ancho y altura
+  ellipse((164*15)-2200,450-60*5,5,5); //centro, ancho y altura
+  ellipse((170*15)-2200,450-76*5,5,5); //centro, ancho y altura
+  ellipse((170*15)-2200,450-56*5,5,5); //centro, ancho y altura
+  ellipse((168*15)-2200,450-60*5,5,5); //centro, ancho y altura
+  
+  stroke(#0831A7);
+  strokeWeight(2);
+  line(150*15-2200,450-43.565*5,(190*15)-2200,450-90.753*5); //punto de inicio, punto de fin
+}
+/////////////////////CODIGO TENDENCIA EXPONENCIAL-PROCESSING///////////////////////////////////////////////
+/*
+ * Universidad Técnica del Norte
+ * Facultad de Ingeniería en Ciencias Aplicadas
+ * Sistemas Embebidos
+ * Nombre: Magali Cárdenas
+ * Lab 04
+ * Fecha: 19/01/2021
+ */
+import processing.serial.*;
+Serial port;
+float datoEstatura;
+float auxEstatura=0;
+float datoPeso;
+int aux=0;
+
+void setup (){
+  
+  port= new Serial(this, "COM10",9600);
+  size(1000,600); // ancho, alto
+  background(#1EFAF4); //color de fondo RGB
+  stroke(0); //color y linea de bordes
+  strokeWeight(2);//ancho de línea
+  line(50,5,50,450); // línea en x(peso)
+  line(50,450,650,450);
+  line(50,450,650,450);//líena en eje y(estatura)
+  
+  stroke(#0A2C1C);//color de líneas internas 
+  strokeWeight(0.5); //ancho de líneas 
+  //lineas de gráfica en y
+  line(125,5,125,450);
+  line(200,5,200,450);
+  line(275,5,275,450);
+  line(350,5,350,450);
+  line(425,5,425,450);
+  line(500,5,500,450);
+  line(575,5,575,450);
+  line(650,5,650,450);
+  
+  //líneas de gráfica en x
+  
+  line(50,400,650,400);
+  line(50,350,650,350);
+  line(50,300,650,300);
+  line(50,250,650,250);
+  line(50,200,650,200);
+  line(50,150,650,150);
+  line(50,100,650,100);
+  line(50,50,650,50);
+  
+  textSize(15);//numero de tamaño números
+  fill(#024324);// color de número
+  text("0",35,450);
+  text("10",15,400);
+  text("20",15,350);
+  text("30",15,300);
+  text("40",15,250);
+  text("50",15,200);
+  text("60",15,150);
+  text("70",15,100);
+  text("80",15,50);
+  
+  //Números en eje x (estatura)
+  text("150",50,470);
+  text("155",125,470);
+  text("160",200,470);
+  text("165",275,470);
+  text("170",350,470);
+  text("175",425,470);
+  text("180",500,470);
+  text("185",575,470);
+  text("190",650,470);
+  
+  textSize(18);
+  fill(1);
+  text("Tendencia exponencial",750,50);
+  text("Magali Cárdenas",770,100);
+  text("Gráfica Peso/Estatura",750,300);
+  text("y=1.1797x-133.39",750,350);
+}
+
+void serialEvent(Serial port){
+  datoEstatura=port.read();
+  auxEstatura=int(datoEstatura); //Convertir de string a int
+  println("Estatura= ");//valores a mostran en monitor processing
+  println(datoEstatura);
+  float expo=pow(2.41,0.02*datoEstatura);
+  datoPeso=3.369*expo; //dato proporcionado de forma serial
+  println("Peso= ");
+  println(datoPeso);
+}
+
+void draw(){
+  //Datos Proporcionados 
+  if(datoPeso>0){
+  stroke(#C4320E);
+  strokeWeight(2);
+  fill(#C4320E);
+  ellipse((datoEstatura*15)-2200,450-(datoPeso)*5,10,10);
+  }
+  //color de datos 
+  stroke(#13861B);
+  strokeWeight(2);
+  fill(#13861B);
+  //graficar cada dato obtenido anteriormente
+  ellipse((170*15)-2200,450-67*5,5,5); //centro, ancho y altura
+  ellipse((180*15)-2200,450-80*5,5,5); //centro, ancho y altura
+  ellipse((170*15)-2200,450-65*5,5,5); //centro, ancho y altura
+  ellipse((178*15)-2200,450-75*5,5,5); //centro, ancho y altura
+  ellipse((160*15)-2200,450-55*5,5,5); //centro, ancho y altura
+  ellipse((163*15)-2200,450-60*5,5,5); //centro, ancho y altura
+  ellipse((165*15)-2200,450-63*5,5,5); //centro, ancho y altura
+  ellipse((170*15)-2200,450-70*5,5,5); //centro, ancho y altura
+  ellipse((164*15)-2200,450-62*5,5,5); //centro, ancho y altura
+  ellipse((176*15)-2200,450-77*5,5,5); //centro, ancho y altura
+  ellipse((164*15)-2200,450-60*5,5,5); //centro, ancho y altura
+  ellipse((170*15)-2200,450-76*5,5,5); //centro, ancho y altura
+  ellipse((170*15)-2200,450-56*5,5,5); //centro, ancho y altura
+  ellipse((168*15)-2200,450-60*5,5,5); //centro, ancho y altura
+  
+  stroke(#0831A7);
+  strokeWeight(2);
+  line(150*15-2200,450-43.565*5,(190*15)-2200,450-90.753*5); //punto de inicio, punto de fin
+}
+//////////////////////CODIGO ARDUINO (LINEAL)////////////////////////////////////
+/*
+ * Universidad Técnica del Norte
+ * Facultad de Ingeniería en Ciencias Aplicadas
+ * Sistemas Embebidos
+ * Nombre: Magali Cárdenas
+ * Lab 04
+ * Fecha: 19/01/2021
+ */
+#include <SoftwareSerial.h> // comunicación serial
+#define pinRx 10 //pines para puerto
+#define pinTx 11 //pines para puerto 
+
+SoftwareSerial mySerial =  SoftwareSerial(pinRx, pinTx);
+
+// matriz de datos
+int matriz[14][2]={
+  {170,67},
+  {180,80},
+  {170,65},
+  {178,75},
+  {160,55},
+  {163,60},
+  {165,63},
+  {170,70},
+  {164,62},
+  {176,77},
+  {164,60},
+  {170,76},
+  {170,56},
+  {168,60},
+};
+
+int col=0; //moverse en columnas
+int fil=0; //moverse en filas
+int Ex=0; //sumatoria x
+int Ey=0; //sumatoria y
+long int Exy=0; //sumatoria x*y
+long int Ex2=0; //sumatoria x^2
+long int Ex_2=0; //sumatoria Ex^2
+int n= 14; //tama;o de muestras
+float Bo; //ordenada en el origen
+float m; //pendiente
+String dato; //recibir estatura
+int estatura; //convertir dato
+float peso;//variable para peso
+int m1; //aux
+
+void setup() {
+  pinMode(pinRx, INPUT); //definicion de pin Rx
+  pinMode(pinTx, OUTPUT); //definición de pin Tx
+  mySerial.begin(9600); // Pirmera comunicación virtual 
+  Serial.begin(9600); //iniciar comunicacion serial 
+  
+  //creacion del modelo
+  for(;fil<n;fil++){
+    Ex=Ex+matriz[fil][0];
+    Ey=Ey+matriz[fil][1];
+    Exy=Exy+(matriz[fil][0]*matriz[fil][1]);
+    Ex2=Ex2+pow(matriz[fil][0],2);
+  }
+  
+  Ex_2=pow(Ex,2);
+  Bo=(float(Ex2*Ey)-float(Ex*Exy))/(float(n*Ex2-Ex_2));
+  m1=(n*Exy)-(Ex*Ey); //aux de desborde
+  m=(float(m1))/(float(n*Ex2-Ex_2));
+  Serial.println("El modelo es: ");
+  Serial.println(String("y=")+String(m)+String("x")+String(Bo));
+  Serial.println("Ingrese su estatura: ");
+}
+
+void loop() {
+  if(Serial.available()>0){
+    dato=Serial.readString();
+    estatura=dato.toInt();
+    peso=m*estatura+Bo;
+    Serial.println("");
+    Serial.println(String("Su peso es: ")+String(peso)+String("Kg"));
+    Serial.println("Ingrese su estatura: ");
+    mySerial.write(estatura);
+  }
+}
+///////////////////////CODIGO ARDUINO(EXPONENCIAL)//////////////////////////////////
+
+/*
+ * Universidad Técnica del Norte
+ * Facultad de Ingeniería en Ciencias Aplicadas
+ * Sistemas Embebidos
+ * Nombre: Magali Cárdenas
+ * Lab 04
+ * Fecha: 19/01/2021
+ */
+#include <SoftwareSerial.h> // comunicación serial para 
+#define pinRx 10 //pines para puerto
+#define pinTx 11 //pines para puerto 
+
+SoftwareSerial mySerial =  SoftwareSerial(pinRx, pinTx);
+
+// matriz de datos
+int matriz[14][2]={
+  {170,67},
+  {180,80},
+  {170,65},
+  {178,75},
+  {160,55},
+  {163,60},
+  {165,63},
+  {170,70},
+  {164,62},
+  {176,77},
+  {164,60},
+  {170,76},
+  {170,56},
+  {168,60},
+};
+
+int col=0; //moverse en columnas
+int fil=0; //moverse en filas
+int Ex=0; //sumatoria x
+int Ey=0; //sumatoria y
+float Exy=0; //sumatoria x*y
+long int Ex2=0; //sumatoria x^2
+long int Ex_2=0; //sumatoria Ex^2
+int n= 14; //tama;o de muestras
+float Bo; //ordenada en el origen
+float Pendlog; //pendiente
+String dato; //recibir estatura
+int estatura; //convertir dato
+float p;
+float m1=0;// auxiliar de desbordamiento
+float peso;//variable de peso
+float ylog=0; //consta logaritmica
+
+void setup() {
+  pinMode(pinRx, INPUT); //definicion de pin Rx
+  pinMode(pinTx, OUTPUT); //definición de pin Tx
+  mySerial.begin(9600); // Pirmera comunicación virtual 
+  Serial.begin(9600); //iniciar comunicacion serial 
+  
+  //creacion del modelo
+  for(;fil<n;fil++){
+    Ex=Ex+matriz[fil][0];
+    Ey=Ey+matriz[fil][1];
+    ylog=ylog+log(matriz[fil][1]);
+    Exy=Exy+(matriz[fil][0]*log(matriz[fil][1]));
+    Ex2=Ex2+pow(matriz[fil][0],2);
+  }
+  
+  Ex_2=pow(Ex,2);
+  Bo=((float(n*Exy)-float(Ex*ylog))/(float(n*Ex2)-float(Ex_2)));
+  m1=float(Bo*(Ex/n));
+  Pendlog=(float(ylog/n))-m1;
+  p=float(exp(Pendlog));
+  Serial.println("El modelo es: ");
+  Serial.println(String("y= ")+String(p)+String("e^(")+String(Bo)+String("*x)"));
+  Serial.println("Ingrese su estatura: ");
+}
+
+
+void loop() {
+    if(Serial.available()>0){
+    dato=Serial.readString();
+    estatura=dato.toInt();
+    peso=p*exp(Bo*estatura);
+    Serial.println("");
+    Serial.println(String("Su peso es: ")+String(peso)+String("Kg"));
+    Serial.println("Ingrese su estatura: ");
+    mySerial.write(estatura);
+}
+}
